@@ -1,16 +1,17 @@
-ARG ALPINE_VERSION=3.10
-FROM alpine:${ALPINE_VERSION}
+FROM ubuntu:20.04
 
 COPY . /mve
 
-RUN apk add --no-cache \
-        make \
+RUN apt update && apt upgrade -y && apt install \
+        build-essential \
         g++ \
-        jpeg-dev \
+        libjpeg-dev \
         libpng-dev \
-        tiff-dev \
-        mesa-dev \
-    && cd /mve \
-    && mkdir bin \
-    && make all
+        libtiff-dev \
+        mesa-common-dev \
+        vim \
+        file -y \
+    #&& cd /mve \
+    #&& make all \
+    && /bin/sh
 
